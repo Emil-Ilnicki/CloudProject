@@ -11,7 +11,6 @@ const Login = () => {
     const [userPassword, setPassword] = useState("Password")
 
     const handleLogin = async (event: {preventDefault: () => void }) => {
-        console.log(typeof event)
         event.preventDefault()
         const res = await login({
             email: userEmail,

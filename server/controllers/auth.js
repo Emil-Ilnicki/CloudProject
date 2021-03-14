@@ -4,12 +4,13 @@ const User = require('../models/UserModel')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv')
+const fetch = require('node-fetch')
 dotenv.config()
 const { auth } = require('../middleware/authMiddleware')
 
 const userlogin = (req,res) => {
     const { email, password } = req.body
-    console.log(email + " " + password) 
+ 
     if(!email || !password){
         res.status(400).send({ msg: "Please enter all fields"})
     }
@@ -96,7 +97,18 @@ const googlelogin = (req, res) => {
     })
 }
 
-module.exports = { googlelogin, userlogin, userregister, authUser }
+const getAPIRecipes = async (req, res) => {
+    const {query} = req.body
+    const edamamFetch = await fetch(
+        `https://api.edamam.com/search?q=${query}&app_id=${process.env.EDAMAM_APP_ID}&app_key=${process.env.EDAMAM_APP_KEY}`
+    )
+
+    const data = await edamamFetch.json()
+
+    res.status(200).send(data.hits)
+}
+
+module.exports = { googlelogin, userlogin, userregister, getAPIRecipes}
 
 
 

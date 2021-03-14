@@ -5,7 +5,7 @@ dotenv.config()
 // Going to be used to authenticate actions on the "git recipes, git exercies etc" tabs 
 const auth = (req, res, next) => {
     const token = req.header('x-auth-token')
-    console.log(token)
+    console.log("Authenticating Token")
 
     if(!token) res.status(401).send({ auth: false })
 

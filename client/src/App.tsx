@@ -6,8 +6,9 @@ import Landing from "./Container/Landing"
 import RecipeForm from './Container/AddRecipeForm'
 import RecipeAPI from './Container/RecipeAPI'
 import Cookies from "js-cookie"
-import { userAuth } from "./Network/API"
 import PrivateNavbar from './Components/Navbar';
+import { AppProvider } from "@shopify/polaris"
+import en from "@shopify/polaris/locales/en.json";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   const [isAuth, setAuth] = useState(false)
 
   const check = () => {  
+    console.log("Called again")
     if (token){
       return true
     } else {
@@ -31,8 +33,6 @@ function App() {
   function Private({ Component, ...rest } : any) {
     return (
       <div>
-        <PrivateNavbar/>
-        {console.log(isAuth)}
         <Route
         {...rest}
         render={(props) =>
@@ -59,7 +59,10 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <AppProvider i18n={en} theme={{ colorScheme: "light" }}>
+      <BrowserRouter>
+      {console.log(isAuth)}
+      {isAuth && <PrivateNavbar/>}
       <Switch>
         <Public exact path="/" Component={Login}/>
         <Public exact path="/register" Component={Register}/>
@@ -68,6 +71,7 @@ function App() {
         <Private exact path="/home/addrecipes" Component={RecipeForm}/>
       </Switch>
     </BrowserRouter>
+    </AppProvider>
   );
 }
 

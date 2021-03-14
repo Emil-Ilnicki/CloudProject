@@ -1559,6 +1559,33 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
+"@shopify/polaris-icons@^4.1.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@shopify/polaris-icons/-/polaris-icons-4.5.0.tgz#1ba9bf3a56d60c880113135a95380213ebbd882b"
+  integrity sha512-ATmB9cFohBoA+p2wumzg6Y9qk6hHibxIqjsJFSi0jWSIn3C8nmqkiCnMg5mJIyb8jWoSgpaqqeTNV57xD17yIQ==
+
+"@shopify/polaris-tokens@^2.16.0":
+  version "2.21.1"
+  resolved "https://registry.yarnpkg.com/@shopify/polaris-tokens/-/polaris-tokens-2.21.1.tgz#d4f2a53edac57505b5ebcaf46b3e278653e10b19"
+  integrity sha512-v4gQQashbv+3bUZ14wPVyomUhdmDDhhyx0BJKagQUC6vu1KWWnrXKC3Li2VgPHYTN5v+B+/0vAfNvSIxR+FArw==
+  dependencies:
+    hsluv "^0.1.0"
+    tslib "^1.14.1"
+
+"@shopify/polaris@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@shopify/polaris/-/polaris-6.1.0.tgz#18c71c158b4b408040caf36d02ebfb38b1db84fd"
+  integrity sha512-9253DwSI0FZqkrUvwsrSF9qZpybJO5MF7/IpoxWGTifqbBjGnx+8zr1aiWPgiKqAQBDc3vsIgCJVs5QGtJ/3/w==
+  dependencies:
+    "@shopify/polaris-icons" "^4.1.0"
+    "@shopify/polaris-tokens" "^2.16.0"
+    "@types/react" "^16.9.12"
+    "@types/react-dom" "^16.9.4"
+    "@types/react-transition-group" "^4.4.0"
+    focus-visible "^5.2.0"
+    lodash "^4.17.4"
+    react-transition-group "^4.4.1"
+
 "@sinonjs/commons@^1.7.0":
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.2.tgz#858f5c4b48d80778fde4b9d541f27edc0d56488b"
@@ -1912,6 +1939,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-dom@^16.9.4":
+  version "16.9.11"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.11.tgz#752e223a1592a2c10f2668b215a0e0667f4faab1"
+  integrity sha512-3UuR4MoWf5spNgrG6cwsmT9DdRghcR4IDFOzNZ6+wcmacxkFykcb5ji0nNVm9ckBT4BCxvCrJJbM4+EYsEEVIg==
+  dependencies:
+    "@types/react" "^16"
+
 "@types/react-dom@^17.0.0":
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.1.tgz#d92d77d020bfb083e07cc8e0ac9f933599a4d56a"
@@ -1955,6 +1989,15 @@
   version "17.0.3"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.3.tgz#ba6e215368501ac3826951eef2904574c262cc79"
   integrity sha512-wYOUxIgs2HZZ0ACNiIayItyluADNbONl7kt8lkLjVK8IitMH5QMyAh75Fwhmo37r1m7L2JaFj03sIfxBVDvRAg==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^16", "@types/react@^16.9.12":
+  version "16.14.5"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.5.tgz#2c39b5cadefaf4829818f9219e5e093325979f4d"
+  integrity sha512-YRRv9DNZhaVTVRh9Wmmit7Y0UFhEVqXqCSw3uazRWMxa2x85hWQZ5BN24i7GXZbaclaLXEcodEeIHsjBA8eAMw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -5222,6 +5265,11 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
+focus-visible@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/focus-visible/-/focus-visible-5.2.0.tgz#3a9e41fccf587bd25dcc2ef045508284f0a4d6b3"
+  integrity sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==
+
 follow-redirects@^1.0.0:
   version "1.13.2"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.2.tgz#dd73c8effc12728ba5cf4259d760ea5fb83e3147"
@@ -5685,6 +5733,11 @@ hsla-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hsla-regex/-/hsla-regex-1.0.0.tgz#c1ce7a3168c8c6614033a4b5f7877f3b225f9c38"
   integrity sha1-wc56MWjIxmFAM6S194d/OyJfnDg=
+
+hsluv@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/hsluv/-/hsluv-0.1.0.tgz#29f40d49642bd56dd0c192122abcc723bb5c2d6c"
+  integrity sha512-ERcanKLAszD2XN3Vh5r5Szkrv9q0oSTudmP0rkiKAGM/3NMc9FLmMZBB7TSqTaXJfSDBOreYTfjezCOYbRKqlw==
 
 html-comment-regex@^1.1.0:
   version "1.1.2"
@@ -7272,7 +7325,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.5:
+"lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.4, lodash@^4.17.5:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -11030,7 +11083,7 @@ tsconfig-paths@^3.9.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
-tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.14.1, tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==

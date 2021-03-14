@@ -1,0 +1,13 @@
+@media all and (min-width: 480px) {
+
+    .FoodLookup{
+        text-align: center;
+        margin: 0 auto;
+        max-width: 320px;
+    }
+
+    .reicpeSearch {
+        margin: 0 auto;
+    }
+
+  }
