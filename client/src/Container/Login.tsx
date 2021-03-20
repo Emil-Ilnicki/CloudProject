@@ -3,6 +3,7 @@ import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 're
 import { Button, Container, CssBaseline, TextField, Typography, Link } from "@material-ui/core"
 import {login} from "../Network/API"
 import Cookies from 'js-cookie'
+import {googleLogin} from '../Network/API'
 
 
 const Login = () => {
@@ -12,13 +13,15 @@ const Login = () => {
 
     const handleLogin = async (event: {preventDefault: () => void }) => {
         event.preventDefault()
-        const res = await login({
+        const response = await login({
             email: userEmail,
             password: userPassword
         })
 
-        console.log(res)
-        Cookies.set("x-auth-token", res.token)
+        console.log(response)
+        console.log(response.user.email)
+        localStorage.setItem("userName", response.user.email)
+        Cookies.set("x-auth-token", response.token)
         window.location.reload(true)
 
 
@@ -69,34 +72,35 @@ const Login = () => {
                       Don't have an account? Sign Up
                     </Link>
                 </form>
-            </Container>
-           
+                <GoogleLogin
+                            clientId="160442659190-j07774osftuemmojlusfe7i5dbif25v2.apps.googleusercontent.com"
+                            buttonText="Login"
+                            onSuccess={ async (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+                                console.log("success")
+                                const googleResponse = res as GoogleLoginResponse
+                                if (googleResponse){
+                                    const response = await googleLogin({tokenId: googleResponse.tokenId})
+                                    const {auth, token, user} = response
+                                    if (auth){
+                                        console.log(user.email)
+                                        localStorage.setItem("userName", user.email)
+                                        Cookies.set("x-auth-token", token)
+                                        window.location.reload(true)
+                                    } else {
+                                        alert("There has been an error")
+                                    }
+                                }
+                                
+                            }}
+                            onFailure={(res: any) => {
+                                console.log("error")
+                                console.log(res)
+                            }}
+                            cookiePolicy={"single_host_origin"}
+                        />
+            </Container>   
         </div>
     )
 }
 
 export default Login
-
-{/* <GoogleLogin
-                clientId="160442659190-j07774osftuemmojlusfe7i5dbif25v2.apps.googleusercontent.com"
-                buttonText="Login"
-                onSuccess={(res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-                    console.log("success")
-                    const googleResponse = res as GoogleLoginResponse
-                    if (googleResponse){
-                        axios({
-                            method: "POST",
-                            url: "http://localhost:4000/api/googlelogin",
-                            data: {tokenId: googleResponse.tokenId}
-                        }).then((res) => {
-                            console.log(res)
-                        })
-                    }
-                    
-                }}
-                onFailure={(res: any) => {
-                    console.log("error")
-                    console.log(res)
-                }}
-                cookiePolicy={"single_host_origin"}
-            /> */}

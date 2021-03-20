@@ -16,19 +16,18 @@ function App() {
   const token = Cookies.get("x-auth-token") !== null ? Cookies.get("x-auth-token") : null
   const [isAuth, setAuth] = useState(false)
 
-  const check = () => {  
+  const check = useCallback(() => {  
     console.log("Called again")
     if (token){
       return true
     } else {
       return false
     }
-
-  }
+  }, [token])
 
   useEffect(() => {
       setAuth(check())
-  }, [])
+  }, [check])
 
   function Private({ Component, ...rest } : any) {
     return (
@@ -61,7 +60,6 @@ function App() {
   return (
     <AppProvider i18n={en} theme={{ colorScheme: "light" }}>
       <BrowserRouter>
-      {console.log(isAuth)}
       {isAuth && <PrivateNavbar/>}
       <Switch>
         <Public exact path="/" Component={Login}/>

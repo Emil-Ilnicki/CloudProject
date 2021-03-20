@@ -8,7 +8,7 @@ const Register = () => {
     const [userEmail, setEmail] = useState("")
     const [userPassword, setPassword] = useState("")
 
-    const handleRegister =  async (event : any) => {
+    const handleRegister =  async (event: {preventDefault: () => void }) => {
         event.preventDefault()
         const res = await register({
             email: userEmail,

@@ -30,5 +30,5 @@ mongoose.connect('mongodb+srv://dbUser:KUyxIWdc6ntntLb4@gitfit.g5gxp.mongodb.net
 
 
 app.listen(PORT, () => {
-    console.log("server is running on port " + PORT)
+    console.log("API server is running on port " + PORT)
 })

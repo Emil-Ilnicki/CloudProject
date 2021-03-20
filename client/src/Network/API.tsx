@@ -1,6 +1,3 @@
-import Cookies from 'js-cookie'
-
-const token : any = Cookies.get("x-auth-token") !== null ? Cookies.get("x-auth-token") : ""
 const URL = `http://localhost:4000`; // URL used only for local development remove this when deploying
 
 const defaultHeaders = () => {
@@ -38,25 +35,20 @@ export const register = async (props: object) => {
     return response 
 }
 
-// export const userAuth = async (token : string) => {
-//   const requestOptions = {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Accept: "application/json",
-//       "x-auth-token": token
-//     }
-//   };
-//   const response = await fetch(`${URL}/api/user/auth`, requestOptions)
-//     .then((res) => res.json())
-//     .then((data) => data.auth)
+export const googleLogin = async (token : object) => {
+  const requestOptions = {
+    method: "POST",
+    headers: defaultHeaders(),
+    body: JSON.stringify(token),
+  };
+  const response = await fetch('http://localhost:4000/api/googlelogin', requestOptions)
+    .then((res) => res.json())
+    .then((data) => data)
 
-//   return response
-// }
+  return response 
+}
 
 export const edamamAPI = async (query: any, token : any) => {
-  console.log(query)
-  console.log(token)
 
   const requestOptions = {
     method: "POST",
@@ -71,6 +63,59 @@ export const edamamAPI = async (query: any, token : any) => {
   const response = await fetch(`${URL}/api/edamam/recipes`, requestOptions)
     .then((res) => res.json())
     .then((data) => data)
+
+  return response
+}
+
+export const addEdamamRecipe = async (props : any, token : any) => {
+  console.log(props)
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "x-auth-token": token
+    },
+    body: JSON.stringify(props),
+  };
+
+  const response = await fetch(`${URL}/api/dbhelper/add`, requestOptions)
+    .then((res) => console.log(res))
+}
+
+export const getRecipes = async (props: object, token : any) => {
+  console.log(props)
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "x-auth-token": token
+    },
+    body: JSON.stringify(props),
+  };
+
+  const response = await fetch(`${URL}/api/dbhelper/get`, requestOptions)
+    .then((response) => response.json())
+    .then((data) => data.response.data)
+
+    return response
+}
+
+export const deleteRecipe = async (props : object, token : any) => {
+  console.log(props)
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "x-auth-token": token
+    },
+    body: JSON.stringify(props),
+  };
+
+  const response = await fetch(`${URL}/api/dbhelper/delete`, requestOptions)
+    .then((res) => res)
 
   return response
 }

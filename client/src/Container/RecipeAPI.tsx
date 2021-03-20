@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button"
-import {edamamAPI} from "../Network/API"
+import {edamamAPI, addEdamamRecipe} from "../Network/API"
 import Cookies from 'js-cookie'
 import "../Styles/EdamamAPI.css"
 import {
@@ -9,10 +9,20 @@ import {
     Card,
     Page
 } from "@shopify/polaris"
+import { VoidExpression } from 'typescript'
 
+interface Recipe {
+    calories: number,
+    label: string,
+    image: string,
+    ingredients: [],
+    digest: {
+        total: number
+    }[]
+}
 
-interface recipeJSON {
-    recipe: object;
+interface RecipeData {
+    recipe: Recipe
 }
 
 const RecipeAPI = () => {
@@ -23,32 +33,38 @@ const RecipeAPI = () => {
     const [search, setSearch] = useState("");
     const [query, setQuery] = useState("chicken");
 
-    const [rows, setRows] = useState([])
+    const [rows, setRows] = useState<any[][]>([])
 
     useEffect(() => {
         getRecipes()
     }, [query])
 
-    const addRecipe = (props : string) => {
-        console.log(props)
-    }
 
     const getRecipes = async () => {
         const response = await edamamAPI({ query }, token)
+        const recipeData = response as Array<RecipeData>
 
-        const finalRows = response.map((items : any) => {
-            console.log(items)
+        const finalRows = recipeData.map((items : RecipeData) => {
             const image : any = (
                 <img src={items.recipe.image} alt={items.recipe.label}></img>
             )
             const title : string = items.recipe.label
-            const calories : number = items.recipe.calories.toFixed(2)
-            const fat : number = items.recipe.digest[0].total.toFixed(2)
-            const protien : number = items.recipe.digest[2].total.toFixed(2)
+            const calories : number = Number(items.recipe.calories.toFixed(2))
+            const fat : number = Number(items.recipe.digest[0].total.toFixed(2))
+            const protein : number = Number(items.recipe.digest[2].total.toFixed(2))
             const addBtn : any = (
                 <Button
                     onClick={() => {
-                        addRecipe("Hello")
+                        const ingredientList = Object.values(items.recipe.ingredients).map((item : any) => {
+                            return item.text
+                        })
+
+                        addEdamamRecipe({
+                            user: localStorage.getItem("userName"),
+                            ingredients: ingredientList,
+                            image: items.recipe.image,
+                            title,
+                        }, token)
                     }}
                 >
                     Add to Repo
@@ -60,7 +76,7 @@ const RecipeAPI = () => {
                 title,
                 calories,
                 fat,
-                protien,
+                protein,
                 addBtn
             ]
         });
@@ -94,8 +110,8 @@ const RecipeAPI = () => {
             </Button>
             </Form>
             </div>
-            <div className="personalRepo">
-                <Page title="Edamam Recipes">
+            <div className="EdamamTable">
+                <Page title="EdamamRecipes">
                     <Card>
                         <DataTable
                             columnContentTypes={["text","text","text","text","text"]}
@@ -104,7 +120,7 @@ const RecipeAPI = () => {
                                 "Title",
                                 "Calories",
                                 "Fat",
-                                "Protien",
+                                "Protein",
                                 ""
                             ]}
                             rows={rows}
