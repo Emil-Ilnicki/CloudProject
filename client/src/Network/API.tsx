@@ -79,7 +79,7 @@ export const addEdamamRecipe = async (props : any, token : any) => {
     body: JSON.stringify(props),
   };
 
-  const response = await fetch(`${URL}/api/dbhelper/add`, requestOptions)
+  const response = await fetch(`${URL}/api/dbhelper/addEdamam`, requestOptions)
     .then((res) => console.log(res))
 }
 
@@ -115,7 +115,24 @@ export const deleteRecipe = async (props : object, token : any) => {
   };
 
   const response = await fetch(`${URL}/api/dbhelper/delete`, requestOptions)
-    .then((res) => res)
+    .then((res) => res.status)
 
   return response
+}
+
+export const addUserRecipe = async (props: object, token : any) => {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "x-auth-token": token
+    },
+    body: JSON.stringify(props),
+  };
+
+  const response = await fetch(`${URL}/api/dbhelper/addUser`, requestOptions)
+    .then((res) => res.status)
+
+    return response
 }

@@ -155,24 +155,34 @@ const googlelogin = (req, res) => {
 }
 
 const getAPIRecipes = async (req, res) => {
-    const {query} = req.body
-    const edamamFetch = await fetch(
-        `https://api.edamam.com/search?q=${query}&app_id=${process.env.EDAMAM_APP_ID}&app_key=${process.env.EDAMAM_APP_KEY}`
-    )
+    const {query, healthLabel} = req.body
+    console.log(req.body)
+    if(healthLabel === "none") {
+        console.log("In none")
+        const edamamFetch = await fetch(
+        `https://api.edamam.com/search?q=${query}&app_id=${process.env.EDAMAM_APP_ID}&app_key=${process.env.EDAMAM_APP_KEY}`)
 
-    const data = await edamamFetch.json()
+        const data = await edamamFetch.json()
+        res.status(200).send(data.hits)
 
-    res.status(200).send(data.hits)
+    } else {
+        console.log("In else")
+        const edamamFetch = await fetch(
+            `https://api.edamam.com/search?q=${query}&app_id=${process.env.EDAMAM_APP_ID}&app_key=${process.env.EDAMAM_APP_KEY}&health=${healthLabel}`)
+            
+        const data = await edamamFetch.json()
+        res.status(200).send(data.hits)
+    }
 }
 
-const dbHelperAddRecipe = async (req, res) => {
+const dbHelperAddEdamamRecipe = async (req, res) => {
     console.log(req.body)
     const requestOptions = { 
         method: 'POST',
         headers: defaultHeaders(),
         body: JSON.stringify(req.body)
     }
-    const response = await fetch(`${DB_HELPER_URL}/db/addRecipe`, requestOptions)
+    const response = await fetch(`${DB_HELPER_URL}/db/addEdamamRecipe`, requestOptions)
         .then((res) => console.log(res))
         .then((data) => console.log(data))
     
@@ -207,13 +217,28 @@ const dbHelperDeleteRecipe = async (req,res) => {
     res.status(200).send({msg: "success"})
 }
 
+const dbHelperAddUserRecipe = async (req,res) => {
+    const requestOptions = { 
+        method: 'POST',
+        headers: defaultHeaders(),
+        body: JSON.stringify(req.body)
+    }
+    const response = await fetch(`${DB_HELPER_URL}/db/addUserRecipe`, requestOptions)
+        .then((res) => console.log(res))
+        .then((data) => console.log(data))
+    
+    res.status(200).send({msg: 'response'})
+
+}
+
 module.exports = {googlelogin, 
     userlogin, 
     userregister, 
     getAPIRecipes, 
-    dbHelperAddRecipe, 
+    dbHelperAddEdamamRecipe, 
     dbHelperGetRecipes, 
-    dbHelperDeleteRecipe}
+    dbHelperDeleteRecipe,
+    dbHelperAddUserRecipe}
 
 
 

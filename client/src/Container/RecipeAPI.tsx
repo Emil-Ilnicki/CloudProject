@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button"
+import DropdownButton from 'react-bootstrap/DropdownButton'
 import {edamamAPI, addEdamamRecipe} from "../Network/API"
 import Cookies from 'js-cookie'
 import "../Styles/EdamamAPI.css"
@@ -9,7 +10,7 @@ import {
     Card,
     Page
 } from "@shopify/polaris"
-import { VoidExpression } from 'typescript'
+import { Dropdown } from 'react-bootstrap'
 
 interface Recipe {
     calories: number,
@@ -31,17 +32,19 @@ const RecipeAPI = () => {
 
     const [recipes, setRecipes] = useState("");
     const [search, setSearch] = useState("");
+    const [healthLabel, setHealthLabel] = useState("none");
     const [query, setQuery] = useState("chicken");
 
     const [rows, setRows] = useState<any[][]>([])
 
     useEffect(() => {
         getRecipes()
-    }, [query])
+    }, [query, healthLabel])
 
 
     const getRecipes = async () => {
-        const response = await edamamAPI({ query }, token)
+        console.log("Get Recipes")
+        const response = await edamamAPI({ query, healthLabel }, token)
         const recipeData = response as Array<RecipeData>
 
         const finalRows = recipeData.map((items : RecipeData) => {
@@ -87,6 +90,7 @@ const RecipeAPI = () => {
 
     function handleSubmit(event: { preventDefault: () => void }){
         event.preventDefault();
+        console.log("Handle Submit")
         setQuery(search)
     }
 
@@ -105,9 +109,22 @@ const RecipeAPI = () => {
                 onChange={(e) => setSearch(e.target.value)}
                 />
             </Form.Group>
-            <Button className="reicpeSearch" variant="primary" type="submit">
-                Search
-            </Button>
+            <Dropdown>
+                <Button variant="primary" type="submit">Search</Button>
+
+                <Dropdown.Toggle split variant="primary" id="health-label-dropdown">
+                    <Dropdown.Menu>
+                        <Dropdown.Item onSelect={() => setHealthLabel("none")}>None</Dropdown.Item>
+                        <Dropdown.Item onSelect={() => setHealthLabel("alcohol-free")}>Alcohol Free</Dropdown.Item>
+                        <Dropdown.Item onSelect={() => setHealthLabel("immuno-supportive")}>Immuno Supportive</Dropdown.Item>
+                        <Dropdown.Item onSelect={() => setHealthLabel("peanut-free")}>Peanut Free</Dropdown.Item>
+                        <Dropdown.Item onSelect={() => setHealthLabel("sugar-conscious")}>Sugar Conscious</Dropdown.Item>
+                        <Dropdown.Item onSelect={() => setHealthLabel("tree-nut-free")}>Tree Nut Free</Dropdown.Item>
+                        <Dropdown.Item onSelect={() => setHealthLabel("vegan")}>Vegan</Dropdown.Item>
+                        <Dropdown.Item onSelect={() => setHealthLabel("vegetarian")}>Vegetarian</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown.Toggle>
+            </Dropdown>
             </Form>
             </div>
             <div className="EdamamTable">

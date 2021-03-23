@@ -1,7 +1,7 @@
 const Recipe = require("../models/Recipe")
 
-const addRecipe = async (req,res) => {
-    console.log("Adding Recipe")
+const addEdamamRecipe = async (req,res) => {
+    console.log("Adding Edamam Recipe")
     const recipe = Recipe(req.body)
 
     try {
@@ -39,4 +39,20 @@ const deleteRecipe = async (req, res) => {
 
 }
 
-module.exports = { addRecipe, getRecipes, deleteRecipe}
+const addUserRecipe = async (req,res) => {
+    console.log("Adding User Recipe")
+    const recipe = Recipe(req.body)
+
+    try {
+        await recipe.save()
+        res.status(200).send({msg: 'success'})
+    } catch (err) {
+        res.status(500).send({msg : "error"})
+    }
+}
+
+module.exports = { addEdamamRecipe, 
+    getRecipes, 
+    deleteRecipe,
+    addUserRecipe
+}
