@@ -1,0 +1,97 @@
+$mobileS: '390px';
+$mobileM: '400px';
+$mobileL: '850px';
+
+@media only screen and (max-width: $mobileS) {
+    .Login{
+        margin: 0 auto;
+        max-width: auto;
+        margin-top: 20px;
+        padding: 10px 0 10px 0
+    }
+
+    .edamamImg {
+        width: 200%;
+        height: auto;
+    }
+
+    .EdamamSearch{
+        margin: 0 auto;
+        max-width: $mobileS;
+    }
+
+    .searchRecipeBtn {
+        font-size: small;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .recipeQuery {
+        font-size: small;
+    }
+}
+@media only screen and (min-width: $mobileM) {
+    .Login{
+        margin: 0 auto;
+        max-width: 850px;
+        margin-top: 20px;
+        padding: 10px 0 10px 0;
+        font-size: medium; 
+    }
+
+    .edamamImg {
+        max-width: 200%;
+        height: auto;
+    }
+
+    .EdamamSearch{
+        margin: 0 auto;
+        max-width: $mobileM;
+    }
+
+    .searchRecipeBtn {
+        font-size: medium;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .recipeQuery {
+        font-size: medium;
+    }
+}
+@media only screen and (min-width: $mobileL) {
+    .Login {
+        margin: 0 auto;
+        max-width: 850px;
+        margin-top: 20px;
+        padding: 10px 0 10px 0;
+        font-size: medium; 
+    }
+
+    .edamamImg {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .EdamamSearch{
+        margin: 0 auto;
+        max-width: $mobileL;
+    }
+
+    .searchRecipeBtn {
+        font-size: large;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .recipeQuery {
+        font-size: large;
+    }
+
+}

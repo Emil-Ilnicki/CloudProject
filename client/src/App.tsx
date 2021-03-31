@@ -5,6 +5,7 @@ import Register from "./Container/Register"
 import Landing from "./Container/Landing"
 import RecipeForm from './Container/AddRecipeForm'
 import RecipeAPI from './Container/RecipeAPI'
+import GetExercies from './Container/GetExercies'
 import Cookies from "js-cookie"
 import PrivateNavbar from './Components/Navbar';
 import { AppProvider } from "@shopify/polaris"
@@ -67,6 +68,7 @@ function App() {
         <Private exact path="/home" Component={Landing}/>
         <Private exact path="/home/edamamRecipes" Component={RecipeAPI}/>
         <Private exact path="/home/addrecipes" Component={RecipeForm}/>
+        <Private exact path="/home/getExercies" Component={GetExercies}/>
       </Switch>
     </BrowserRouter>
     </AppProvider>

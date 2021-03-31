@@ -1,0 +1,37 @@
+$mobileS: '390px';
+$mobileM: '400px';
+$mobileL: '850px';
+
+@media all and (max-width: $mobileS) {
+    .add-recipe-form{
+        margin: 0 auto;
+        max-width: auto;
+        margin-top: 20px;
+        padding: 10px 0 10px 0
+    }
+    .form-con{
+        font-size: small;
+    }
+}
+@media all and (min-width: $mobileM) {
+    .add-recipe-form{
+        margin: 0 auto;
+        max-width: calc(490px /2);
+    }
+    .form-con{
+        font-size: medium;
+    }
+}
+@media all and (min-width: $mobileS) {
+    .add-recipe-form{
+        margin: 0 auto;
+        max-width: 850px;
+        margin-top: 20px;
+        padding: 10px 0 10px 0;
+        font-size: medium; 
+    }
+    .form-con{
+        font-size: large;
+    }
+}
+

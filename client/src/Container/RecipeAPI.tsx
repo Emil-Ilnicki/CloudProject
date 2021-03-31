@@ -4,7 +4,8 @@ import Button from "react-bootstrap/Button"
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import {edamamAPI, addEdamamRecipe} from "../Network/API"
 import Cookies from 'js-cookie'
-import "../Styles/EdamamAPI.css"
+import { Container } from '@material-ui/core'
+import "../Styles/EdamamAPI.scss"
 import {
     DataTable,
     Card,
@@ -49,7 +50,7 @@ const RecipeAPI = () => {
 
         const finalRows = recipeData.map((items : RecipeData) => {
             const image : any = (
-                <img src={items.recipe.image} alt={items.recipe.label}></img>
+                <img className="edamamImg" src={items.recipe.image} alt={items.recipe.label}></img>
             )
             const title : string = items.recipe.label
             const calories : number = Number(items.recipe.calories.toFixed(2))
@@ -98,10 +99,11 @@ const RecipeAPI = () => {
     return (
         <div>
             <div className="EdamamSearch">
+            <Container>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="recipieName">
-                <Form.Label> Recipe Name </Form.Label>
-                <Form.Control
+                <Form.Label className="recipeQuery"> Recipe Name </Form.Label>
+                <Form.Control className="recipeQuery"
                     autoFocus
                     type="recipeName"
                 placeholder="Enter a recipe name (e.g. Apple)"
@@ -109,10 +111,11 @@ const RecipeAPI = () => {
                 onChange={(e) => setSearch(e.target.value)}
                 />
             </Form.Group>
+            <div className="searchRecipeBtn">
             <Dropdown>
-                <Button variant="primary" type="submit">Search</Button>
+                <Button variant="primary" size="lg" type="submit">Search</Button>
 
-                <Dropdown.Toggle split variant="primary" id="health-label-dropdown">
+                <Dropdown.Toggle split variant="primary" size="lg" id="health-label-dropdown">
                     <Dropdown.Menu>
                         <Dropdown.Item onSelect={() => setHealthLabel("none")}>None</Dropdown.Item>
                         <Dropdown.Item onSelect={() => setHealthLabel("alcohol-free")}>Alcohol Free</Dropdown.Item>
@@ -125,9 +128,12 @@ const RecipeAPI = () => {
                     </Dropdown.Menu>
                 </Dropdown.Toggle>
             </Dropdown>
+            </div>
             </Form>
+            </Container>
             </div>
             <div className="EdamamTable">
+                <Container>
                 <Page title="EdamamRecipes">
                     <Card>
                         <DataTable
@@ -144,6 +150,7 @@ const RecipeAPI = () => {
                         />
                     </Card>
                 </Page>  
+                </Container>
             </div>
         </div>
 

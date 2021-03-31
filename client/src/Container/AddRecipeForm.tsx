@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Cookies from 'js-cookie'
 import { addUserRecipe } from '../Network/API'
+import { Container } from '@material-ui/core'
+import '../Styles/RecipeForm.scss'
 
 
 
@@ -33,10 +35,11 @@ const RecipeForm = () => {
 
     return (
         <div className="add-recipe-form">
+            <Container component="main" maxWidth="xs">
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="recipeName">
                     <Form.Label> Recipe Name </Form.Label>
-                    <Form.Control
+                    <Form.Control className="form-con"
                         autoFocus
                         type="recipeName"
                         placeholder="Enter a name for the recipe"
@@ -46,7 +49,7 @@ const RecipeForm = () => {
                 </Form.Group>  
                 <Form.Group>
                     <Form.Label> Ingredients </Form.Label> 
-                    <Form.Control
+                    <Form.Control className="form-con"
                         placeholder="Please enter comma seperated values (e.g., 1 egg, 2 cups flour, ...)"
                         as="textarea"
                         rows={4}
@@ -58,6 +61,7 @@ const RecipeForm = () => {
                 Sumbit{" "}
                 </Button>
             </Form>
+            </Container>
         </div>
     )
 }

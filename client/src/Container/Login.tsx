@@ -4,6 +4,7 @@ import { Button, Container, CssBaseline, TextField, Typography, Link } from "@ma
 import {login} from "../Network/API"
 import Cookies from 'js-cookie'
 import {googleLogin} from '../Network/API'
+import '../Styles/LoginForm.scss'
 
 
 const Login = () => {
@@ -27,10 +28,15 @@ const Login = () => {
 
     }
     return (
+        <div>
         <div className="Login">
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <Typography component="h1" variant="h5">
+                <Typography 
+                 component="h1" 
+                 variant="h2" 
+                 align="center"
+                > 
                     Sign in
                 </Typography>
                 <form onSubmit={handleLogin}>
@@ -40,7 +46,7 @@ const Login = () => {
                         required
                         fullWidth
                         id="email"
-                        label={userEmail}
+                        label="Email"
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -53,7 +59,7 @@ const Login = () => {
                         required
                         fullWidth
                         name="password"
-                        label={userPassword}
+                        label="Password"
                         type="password"
                         id="password"
                         autoComplete="current-password"
@@ -68,37 +74,53 @@ const Login = () => {
                     >      
                         Sign In
                     </Button>
-                    <Link href="/register" variant="body2">
+                    <Link href="/register" variant="h5">
                       Don't have an account? Sign Up
                     </Link>
                 </form>
-                <GoogleLogin
-                            clientId="160442659190-j07774osftuemmojlusfe7i5dbif25v2.apps.googleusercontent.com"
-                            buttonText="Login"
-                            onSuccess={ async (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-                                console.log("success")
-                                const googleResponse = res as GoogleLoginResponse
-                                if (googleResponse){
-                                    const response = await googleLogin({tokenId: googleResponse.tokenId})
-                                    const {auth, token, user} = response
-                                    if (auth){
-                                        console.log(user.email)
-                                        localStorage.setItem("userName", user.email)
-                                        Cookies.set("x-auth-token", token)
-                                        window.location.reload(true)
-                                    } else {
-                                        alert("There has been an error")
-                                    }
-                                }
-                                
-                            }}
-                            onFailure={(res: any) => {
-                                console.log("error")
-                                console.log(res)
-                            }}
-                            cookiePolicy={"single_host_origin"}
-                        />
-            </Container>   
+            </Container>
+        </div>
+        <div className="googleBtn"> 
+            <GoogleLogin
+                clientId="160442659190-j07774osftuemmojlusfe7i5dbif25v2.apps.googleusercontent.com"
+                // render={renderProps => (
+                //     <button onClick={renderProps.onClick} style={
+                //         {
+                //             backgroundColor: "#34a853",
+                //             color: "#ffffff",
+                //             fontFamily: "Open Sans, sans-serif",
+                //             fontSize: "1.5em",
+                //             border: "none",
+                //             borderBottom: ".15em solid black",
+                //             borderRadius: "3px",
+                //             padding: "0.5em 1.3em"
+                //         }
+                //     }>Login with Google</button>
+                //   )}
+                buttonText="Login with Google"
+                onSuccess={ async (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+                console.log("success")
+                const googleResponse = res as GoogleLoginResponse
+                    if (googleResponse){
+                        const response = await googleLogin({tokenId: googleResponse.tokenId})
+                        const {auth, token, user} = response
+                            if (auth){
+                                console.log(user.email)
+                                localStorage.setItem("userName", user.email)
+                                Cookies.set("x-auth-token", token)
+                                window.location.reload(true)
+                            } else {
+                                alert("There has been an error")
+                            }
+                        }   
+                    }}
+                onFailure={(res: any) => {
+                    console.log("error")
+                    console.log(res)
+                }}
+                cookiePolicy={"single_host_origin"}
+            />   
+        </div>
         </div>
     )
 }
