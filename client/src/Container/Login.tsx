@@ -1,4 +1,4 @@
-import React, {EventHandler, useState}from "react"
+import React, {useState} from "react"
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
 import { Button, Container, CssBaseline, TextField, Typography, Link } from "@material-ui/core"
 import {login} from "../Network/API"
