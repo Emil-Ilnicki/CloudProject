@@ -1,0 +1,33 @@
+$mobileS: '390px';
+$mobileM: '490px';
+$mobileL: '850px';
+
+@media only screen and (max-width: $mobileS) {
+    .edamamImg {
+        width: 200%;
+        height: auto;
+    }
+
+    .countdown-time {
+        font-size: large;
+    }
+}
+@media only screen and (min-width: $mobileM) {
+    .edamamImg {
+        max-width: 200%;
+        height: auto;
+    }
+
+    .countdown-time {
+        font-size: large;
+    }
+}
+@media only screen and (min-width: $mobileL) {
+    .edamamImg {
+        max-width: 100%;
+        height: auto;
+    }
+    .countdown-time {
+        font-size: large;
+    }
+}

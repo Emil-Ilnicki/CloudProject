@@ -1,13 +1,13 @@
 $mobileS: '390px';
-$mobileM: '490px';
+$mobileM: '400px';
 $mobileL: '850px';
 
 @media only screen and (max-width: $mobileS) {
     .Login{
         margin: 0 auto;
         max-width: auto;
-        margin-top: 20px;
-        padding: 10px 0 10px 0
+        padding: 10px 0 10px 0;
+        font-size: medium; 
     }
 
     .googleBtn {
@@ -21,7 +21,6 @@ $mobileL: '850px';
     .Login{
         margin: 0 auto;
         max-width: 850px;
-        margin-top: 20px;
         padding: 10px 0 10px 0;
         font-size: medium; 
     }
@@ -37,7 +36,6 @@ $mobileL: '850px';
     .Login {
         margin: 0 auto;
         max-width: 850px;
-        margin-top: 20px;
         padding: 10px 0 10px 0;
         font-size: medium; 
     }

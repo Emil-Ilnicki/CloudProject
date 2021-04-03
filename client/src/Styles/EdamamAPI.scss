@@ -3,12 +3,6 @@ $mobileM: '400px';
 $mobileL: '850px';
 
 @media only screen and (max-width: $mobileS) {
-    .Login{
-        margin: 0 auto;
-        max-width: auto;
-        margin-top: 20px;
-        padding: 10px 0 10px 0
-    }
 
     .edamamImg {
         width: 200%;
@@ -33,13 +27,6 @@ $mobileL: '850px';
     }
 }
 @media only screen and (min-width: $mobileM) {
-    .Login{
-        margin: 0 auto;
-        max-width: 850px;
-        margin-top: 20px;
-        padding: 10px 0 10px 0;
-        font-size: medium; 
-    }
 
     .edamamImg {
         max-width: 200%;
@@ -64,13 +51,6 @@ $mobileL: '850px';
     }
 }
 @media only screen and (min-width: $mobileL) {
-    .Login {
-        margin: 0 auto;
-        max-width: 850px;
-        margin-top: 20px;
-        padding: 10px 0 10px 0;
-        font-size: medium; 
-    }
 
     .edamamImg {
         max-width: 100%;

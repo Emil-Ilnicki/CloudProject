@@ -1,0 +1,29 @@
+$mobileS: '390px';
+$mobileM: '400px';
+$mobileL: '850px';
+
+@media all and (max-width: $mobileS) {
+    .exercise-search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto
+    }
+}
+@media all and (min-width: $mobileM) {
+    .exercise-search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto
+    }
+}
+@media all and (min-width: $mobileL) {
+    .exercise-search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto
+    }
+}
+

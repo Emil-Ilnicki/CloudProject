@@ -148,23 +148,23 @@ const PrivateNavbar = () => {
         <Link to="/home">
           <List>
             <ListItem button>
-            <ListItemIcon><HomeIcon/></ListItemIcon>
+            <ListItemIcon><HomeIcon fontSize="large"/></ListItemIcon>
             <ListItemText> Home </ListItemText>
             </ListItem>
           </List>
         </Link>
-        <Link to="/home/edamamRecipes">
+        <Link to="/home/getRecipes">
           <List>
             <ListItem button>
-            <ListItemIcon><FastfoodIcon/></ListItemIcon>
-            <ListItemText> Edamam Recipes </ListItemText>
+            <ListItemIcon><FastfoodIcon fontSize="large"/></ListItemIcon>
+            <ListItemText> Get Recipes </ListItemText>
             </ListItem>
           </List>
         </Link>
-        <Link to="/home/addrecipes">
+        <Link to="/home/addRecipes">
           <List>
             <ListItem button>
-            <ListItemIcon><CreateIcon/></ListItemIcon>
+            <ListItemIcon><CreateIcon fontSize="large"/></ListItemIcon>
             <ListItemText> Create Recipe </ListItemText>
             </ListItem>
           </List>
@@ -172,7 +172,7 @@ const PrivateNavbar = () => {
         <Link to="/home/getExercies">
           <List>
             <ListItem button>
-            <ListItemIcon><AccessibilityNewIcon/></ListItemIcon>
+            <ListItemIcon><AccessibilityNewIcon fontSize="large"/></ListItemIcon>
             <ListItemText> Get Exercies </ListItemText>
             </ListItem>
           </List>

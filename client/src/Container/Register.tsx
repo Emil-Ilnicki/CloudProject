@@ -1,14 +1,24 @@
 import React, { useState } from 'react'
 import { Button, Container, CssBaseline, TextField, Typography, Link } from "@material-ui/core"
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import {register} from "../Network/API"
 import Cookies from 'js-cookie'
 
+const useStyles = makeStyles((theme : Theme) => 
+    createStyles({
+        resize: {
+            fontSize: "medium"
+        }
+    })
+)
+
 const Register = () => {
 
+    const classes = useStyles()
     const [userEmail, setEmail] = useState("")
     const [userPassword, setPassword] = useState("")
 
-    const handleRegister =  async (event: {preventDefault: () => void }) => {
+    const handleRegister = async (event: {preventDefault: () => void }) => {
         event.preventDefault()
         const res = await register({
             email: userEmail,
@@ -25,23 +35,45 @@ const Register = () => {
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" 
+                 variant="h2" 
+                 align="center">
                 Register
             </Typography>
             <form onSubmit={handleRegister}>
                 <TextField
+                    InputProps = {{
+                        classes: {
+                            input: classes.resize,
+                        }
+                    }}
+                    InputLabelProps = {{
+                        classes: {
+                            root: classes.resize,
+                        }
+                    }}
                     variant="outlined"
                     margin="normal"
                     required
                     fullWidth
                     id="email"
-                    label="Email Address"
+                    label="Email"
                     name="email"
                     autoComplete="email"
                     autoFocus 
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <TextField
+                    InputProps = {{
+                        classes: {
+                            input: classes.resize,
+                        }
+                    }}
+                    InputLabelProps = {{
+                        classes: {
+                            root: classes.resize,
+                        }
+                    }}
                     variant="outlined"
                     margin="normal"
                     required
@@ -61,7 +93,7 @@ const Register = () => {
                 >      
                     Register
                 </Button>
-                <Link href="/" variant="body2">
+                <Link href="/" variant="h5">
                     Already have an account? Sign in
                 </Link>
             </form>

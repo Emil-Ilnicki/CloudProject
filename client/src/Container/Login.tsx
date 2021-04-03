@@ -1,14 +1,24 @@
 import React, {useState} from "react"
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
 import { Button, Container, CssBaseline, TextField, Typography, Link } from "@material-ui/core"
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import {login} from "../Network/API"
 import Cookies from 'js-cookie'
 import {googleLogin} from '../Network/API'
 import '../Styles/LoginForm.scss'
 
+const useStyles = makeStyles((theme : Theme) => 
+    createStyles({
+        resize: {
+            fontSize: "medium"
+        }
+    })
+)
+
 
 const Login = () => {
 
+    const classes = useStyles()
     const [userEmail, setEmail] = useState("Email Address")
     const [userPassword, setPassword] = useState("Password")
 
@@ -20,12 +30,13 @@ const Login = () => {
         })
 
         console.log(response)
-        console.log(response.user.email)
-        localStorage.setItem("userName", response.user.email)
-        Cookies.set("x-auth-token", response.token)
-        window.location.reload(true)
-
-
+        if(response.msg === "This user does not exist") {
+            window.alert("This user not exist.")
+        } else {
+            localStorage.setItem("userName", response.user.email)
+            Cookies.set("x-auth-token", response.token)
+            window.location.reload(true)
+        }
     }
     return (
         <div>
@@ -41,6 +52,16 @@ const Login = () => {
                 </Typography>
                 <form onSubmit={handleLogin}>
                     <TextField
+                        InputProps = {{
+                            classes: {
+                                input: classes.resize,
+                            }
+                        }}
+                        InputLabelProps = {{
+                            classes: {
+                                root: classes.resize,
+                            }
+                        }}
                         variant="outlined"
                         margin="normal"
                         required
@@ -54,6 +75,16 @@ const Login = () => {
 
                     />
                     <TextField
+                        InputProps = {{
+                            classes: {
+                                input: classes.resize,
+                            }
+                        }}
+                        InputLabelProps = {{
+                            classes: {
+                                root: classes.resize,
+                            }
+                        }}
                         variant="outlined"
                         margin="normal"
                         required
@@ -83,23 +114,8 @@ const Login = () => {
         <div className="googleBtn"> 
             <GoogleLogin
                 clientId="160442659190-j07774osftuemmojlusfe7i5dbif25v2.apps.googleusercontent.com"
-                // render={renderProps => (
-                //     <button onClick={renderProps.onClick} style={
-                //         {
-                //             backgroundColor: "#34a853",
-                //             color: "#ffffff",
-                //             fontFamily: "Open Sans, sans-serif",
-                //             fontSize: "1.5em",
-                //             border: "none",
-                //             borderBottom: ".15em solid black",
-                //             borderRadius: "3px",
-                //             padding: "0.5em 1.3em"
-                //         }
-                //     }>Login with Google</button>
-                //   )}
                 buttonText="Login with Google"
                 onSuccess={ async (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-                console.log("success")
                 const googleResponse = res as GoogleLoginResponse
                     if (googleResponse){
                         const response = await googleLogin({tokenId: googleResponse.tokenId})

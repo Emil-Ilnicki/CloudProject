@@ -5,7 +5,7 @@ import Register from "./Container/Register"
 import Landing from "./Container/Landing"
 import RecipeForm from './Container/AddRecipeForm'
 import RecipeAPI from './Container/RecipeAPI'
-import GetExercies from './Container/GetExercies'
+import GetDBExercise from './Container/GetExercies'
 import Cookies from "js-cookie"
 import PrivateNavbar from './Components/Navbar';
 import { AppProvider } from "@shopify/polaris"
@@ -18,7 +18,6 @@ function App() {
   const [isAuth, setAuth] = useState(false)
 
   const check = useCallback(() => {  
-    console.log("Called again")
     if (token){
       return true
     } else {
@@ -66,9 +65,9 @@ function App() {
         <Public exact path="/" Component={Login}/>
         <Public exact path="/register" Component={Register}/>
         <Private exact path="/home" Component={Landing}/>
-        <Private exact path="/home/edamamRecipes" Component={RecipeAPI}/>
-        <Private exact path="/home/addrecipes" Component={RecipeForm}/>
-        <Private exact path="/home/getExercies" Component={GetExercies}/>
+        <Private exact path="/home/getRecipes" Component={RecipeAPI}/>
+        <Private exact path="/home/addRecipes" Component={RecipeForm}/>
+        <Private exact path="/home/getExercies" Component={GetDBExercise}/>
       </Switch>
     </BrowserRouter>
     </AppProvider>

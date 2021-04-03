@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button"
-//import DropdownButton from 'react-bootstrap/DropdownButton'
 import {edamamAPI, addEdamamRecipe} from "../Network/API"
 import Cookies from 'js-cookie'
 import { Container } from '@material-ui/core'
-import "../Styles/EdamamAPI.scss"
 import {
     DataTable,
     Card,
     Page
 } from "@shopify/polaris"
 import { Dropdown } from 'react-bootstrap'
+import "../Styles/EdamamAPI.scss"
 
 interface Recipe {
     calories: number,
@@ -34,7 +33,7 @@ const RecipeAPI = () => {
     const [recipes, setRecipes] = useState("");
     const [search, setSearch] = useState("");
     const [healthLabel, setHealthLabel] = useState("none");
-    const [query, setQuery] = useState("chicken");
+    const [query, setQuery] = useState("pork");
 
     const [rows, setRows] = useState<any[][]>([])
 
@@ -44,7 +43,6 @@ const RecipeAPI = () => {
 
 
     const getRecipes = async () => {
-        console.log("Get Recipes")
         const response = await edamamAPI({ query, healthLabel }, token)
         const recipeData = response as Array<RecipeData>
 
@@ -58,17 +56,20 @@ const RecipeAPI = () => {
             const protein : number = Number(items.recipe.digest[2].total.toFixed(2))
             const addBtn : any = (
                 <Button
-                    onClick={() => {
+                    onClick={async () => {
                         const ingredientList = Object.values(items.recipe.ingredients).map((item : any) => {
                             return item.text
                         })
 
-                        addEdamamRecipe({
+                        const response = await addEdamamRecipe({
                             user: localStorage.getItem("userName"),
                             ingredients: ingredientList,
                             image: items.recipe.image,
                             title,
                         }, token)
+
+                        if (response === 200) window.alert(`${title} was added to your repository`)
+                        else window.alert("There was an error adding that recipe, try again.")
                     }}
                 >
                     Add to Repo
