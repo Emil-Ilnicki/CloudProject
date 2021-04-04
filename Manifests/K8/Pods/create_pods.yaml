@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: distributed-project-deployment
+  labels:
+    app: distributed-project
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: distributed-project
+  template:
+    metadata:
+      labels:
+        app: distributed-project
+    spec:
+      volumes:
+      - name: shared
+        emptyDir: {}
+      containers:
+      - name: static-site
+        image: avdonr/distributed-project:website
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: shared
+          mountPath: /shared
+        resources:
+        ports:
+        - containerPort: 80
+        - containerPort: 9500
+      - name: server
+        image: avdonr/distributed-project:server
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: shared
+          mountPath: /shared
+        resources:
+        ports:
+        - containerPort: 9500
+      - name: database
+        image: avdonr/distributed-project:database
+        imagePullPolicy: Always
+        resources:
+        ports:
+        - containerPort: 5432
