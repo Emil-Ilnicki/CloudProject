@@ -1,6 +1,4 @@
-import { ContactSupportOutlined } from "@material-ui/icons";
 
-const URL = `http://localhost:4000`; // URL used only for local development remove this when deploying
 
 const defaultHeaders = () => {
   return {
@@ -16,7 +14,7 @@ export const login = async (props: object) => {
         headers: defaultHeaders(),
         body: JSON.stringify(props),
     };
-    const response = await fetch(`${URL}/api/login`, requestOptions)
+    const response = await fetch(`/api/login`, requestOptions)
       .then((res) => res.json())
       .then((data) => data)
 
@@ -30,7 +28,7 @@ export const register = async (props: object) => {
         headers: defaultHeaders(),
         body: JSON.stringify(props),
     };
-    const response = await fetch(`${URL}/api/register`, requestOptions)
+    const response = await fetch(`/api/register`, requestOptions)
       .then((res) => res.json())
       .then((data) => data)
 
@@ -43,7 +41,7 @@ export const googleLogin = async (token : object) => {
     headers: defaultHeaders(),
     body: JSON.stringify(token),
   };
-  const response = await fetch('http://localhost:4000/api/googlelogin', requestOptions)
+  const response = await fetch(`/api/googlelogin`, requestOptions)
     .then((res) => res.json())
     .then((data) => data)
 
@@ -62,7 +60,7 @@ export const edamamAPI = async (query: any, token : any) => {
     body: JSON.stringify(query)
   }
 
-  const response = await fetch(`${URL}/api/edamam/recipes`, requestOptions)
+  const response = await fetch(`/api/edamam/recipes`, requestOptions)
     .then((res) => res.json())
     .then((data) => data)
 
@@ -81,7 +79,7 @@ export const addEdamamRecipe = async (props : any, token : any) => {
     body: JSON.stringify(props),
   };
 
-  const response = await fetch(`${URL}/api/dbhelper/addEdamam`, requestOptions)
+  const response = await fetch(`/api/dbhelper/addEdamam`, requestOptions)
     .then((res) => res.status)
 
   return response
@@ -98,7 +96,7 @@ export const getRecipes = async (props: object, token : any) => {
     body: JSON.stringify(props),
   };
 
-  const response = await fetch(`${URL}/api/dbhelper/get`, requestOptions)
+  const response = await fetch(`/api/dbhelper/get`, requestOptions)
     .then((response) => response.json())
     .then((data) => data.response.data)
 
@@ -117,7 +115,7 @@ export const deleteRecipe = async (props : object, token : any) => {
     body: JSON.stringify(props),
   };
 
-  const response = await fetch(`${URL}/api/dbhelper/delete`, requestOptions)
+  const response = await fetch(`/api/dbhelper/delete`, requestOptions)
     .then((res) => res.status)
   
 
@@ -135,7 +133,7 @@ export const addUserRecipe = async (props: object, token : any) => {
     body: JSON.stringify(props),
   };
 
-  const response = await fetch(`${URL}/api/dbhelper/addUser`, requestOptions)
+  const response = await fetch(`/api/dbhelper/addUser`, requestOptions)
     .then((res) => res.status)
 
     return response
@@ -152,7 +150,7 @@ export const GetExercise = async (props: object, token: any) => {
     body: JSON.stringify(props),
   };
   
-  const response = await fetch(`${URL}/api/dbhelper/getDBExercise`, requestOptions)
+  const response = await fetch(`/api/dbhelper/getDBExercise`, requestOptions)
     .then((res) => res.json())
     .then((data) => data.response.data)
 
@@ -170,7 +168,7 @@ export const addUserExercise = async (props : object, token : any) => {
     body: JSON.stringify(props),
   };
 
-  const response = await fetch(`${URL}/api/dbhelper/addUserExercise`, requestOptions)
+  const response = await fetch(`/api/dbhelper/addUserExercise`, requestOptions)
     .then((res) => res.status)
 
     return response
@@ -188,7 +186,7 @@ export const deleteUserExercise = async (props : object, token : any) => {
     body: JSON.stringify(props),
   };
 
-  const response = await fetch(`${URL}/api/dbhelper/deleteUserExercise`, requestOptions)
+  const response = await fetch(`/api/dbhelper/deleteUserExercise`, requestOptions)
     .then((res) => res.status)
 
     return response
@@ -206,7 +204,7 @@ export const getUserExercise = async (props : object, token : any) => {
     body: JSON.stringify(props),
   };
 
-  const response = await fetch(`${URL}/api/dbhelper/getUserExercise`, requestOptions)
+  const response = await fetch(`/api/dbhelper/getUserExercise`, requestOptions)
     .then((res) => res.json())
     .then((data) => data.response.data)
 

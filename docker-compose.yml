@@ -1,0 +1,31 @@
+version: '3'
+services:
+    client:
+        build:
+            dockerfile: Dockerfile
+            context: ./client
+        ports:
+            - 3000:3000
+        depends_on:
+            - "api"
+    
+    api:
+        build:
+            dockerfile: Dockerfile
+            context: ./server
+        ports:
+            - 4000:4000
+
+    auth:
+        build:
+            dockerfile: Dockerfile
+            context: ./authserver
+        ports:
+            - 4002:4002
+
+    dbhelper:
+        build:
+            dockerfile: Dockerfile
+            context: ./dbhelper
+        ports:
+            - 4001:4001

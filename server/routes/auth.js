@@ -25,11 +25,13 @@ router.post("/api/register", userregister);
 router.post("/api/edamam/recipes", auth, getAPIRecipes);
 
 // DbHelper Route
+// DbHelper Recipes
 router.post("/api/dbhelper/addEdamam", auth, dbHelperAddEdamamRecipe);
 router.post("/api/dbhelper/get", auth, dbHelperGetRecipes);
 router.post("/api/dbhelper/delete", auth, dbHelperDeleteRecipe);
 router.post("/api/dbhelper/addUser", auth, dbHelperAddUserRecipe);
 
+// DbHelper Exercises
 router.post("/api/dbhelper/getDBExercise", auth, dbHelperGetDBExercise);
 router.post("/api/dbhelper/getUserExercise", auth, dbHelperGetUserExercise);
 router.post("/api/dbhelper/addUserExercise", auth, dbHelperAddUserExercise);

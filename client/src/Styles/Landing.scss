@@ -12,7 +12,7 @@ $mobileL: '850px';
         font-size: large;
     }
 }
-@media only screen and (min-width: $mobileM) {
+@media only screen and (max-width: $mobileM) {
     .edamamImg {
         max-width: 200%;
         height: auto;
@@ -22,7 +22,7 @@ $mobileL: '850px';
         font-size: large;
     }
 }
-@media only screen and (min-width: $mobileL) {
+@media only screen and (max-width: $mobileL) {
     .edamamImg {
         max-width: 100%;
         height: auto;

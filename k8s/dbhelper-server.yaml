@@ -1,0 +1,38 @@
+# DBHelper Server Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: dbhelper-server-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            component: dbserver
+
+    template:
+        metadata:
+            labels:
+                component: dbserver
+        spec:
+            containers:
+                -
+                    name: dbserver
+                    image: emililnicki/gitfit:dbhelper
+                    imagePullPolicy: Always
+                    ports:
+                        -   name: port4001
+                            containerPort: 4001
+---
+# DBHelper Server Cluster Ip Service
+apiVersion: v1
+kind: Service
+metadata:
+    name: dbhelper-server-cluster-ip-service
+spec:
+    type: ClusterIP
+    selector:
+        component: dbserver
+    ports:
+        -   name: port4001
+            port: 4001
+            targetPort: 4001

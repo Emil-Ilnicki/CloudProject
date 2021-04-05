@@ -126,7 +126,7 @@ const Login = () => {
                                 Cookies.set("x-auth-token", token)
                                 window.location.reload(true)
                             } else {
-                                alert("There has been an error")
+                                alert("Google 1 There has been an error")
                             }
                         }   
                     }}

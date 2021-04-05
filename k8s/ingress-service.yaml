@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+    name: ingress-service
+    annotations: # Additional config options that specify higher level configuration around the ingress option that it creates
+      kubernetes.io/ingress.class: nginx
+      # nginx.ingress.kubernetes.io/use-regex: "true"
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "64k"
+      nginx.ingress.kubernetes.io/proxy-buffers-number: "8m"
+      nginx.ingress.kubernetes.io/proxy-body-size: "8m"
+spec:
+    tls:
+      - hosts:
+        - gitfit.online
+        secretName: gitfit-onlinez
+    rules:
+        - host: gitfit.online
+          http:
+            paths:
+                - path: /
+                  backend:
+                    serviceName: client-cluster-ip-service
+                    servicePort: 3000
+                - path: /api
+                  backend:
+                    serviceName: api-server-cluster-ip-service
+                    servicePort: 4000

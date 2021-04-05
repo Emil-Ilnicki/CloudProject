@@ -1,0 +1,38 @@
+# Auth Server Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: auth-server-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            component: authserver
+
+    template:
+        metadata:
+            labels:
+                component: authserver
+        spec:
+            containers:
+                -
+                    name: authserver
+                    image: emililnicki/gitfit:authserver
+                    imagePullPolicy: Always
+                    ports:
+                        -   name: port4002
+                            containerPort: 4002
+---
+# Auth Server Cluster Ip Service
+apiVersion: v1
+kind: Service
+metadata:
+    name: auth-server-cluster-ip-service
+spec:
+    type: ClusterIP
+    selector:
+        component: authserver
+    ports:
+        -   name: port4002
+            port: 4002
+            targetPort: 4002

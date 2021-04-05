@@ -1,4 +1,3 @@
-//console.warn("sw file in public folder");
 let cacheData = "appV1";
 this.addEventListener("install", (event) => {
   event.waitUntil(

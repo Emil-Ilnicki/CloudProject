@@ -25,11 +25,14 @@ const Register = () => {
             password: userPassword
         })
         
-        console.log(res.token)
-    
-        Cookies.set("x-auth-token", res.token)
-        window.location.reload(true);
-
+        console.log(res)
+        if (res.msg === "User already exists"){
+            window.alert("This user already exists!")
+        } else {
+            window.alert("User has been Registered!")
+            Cookies.set("x-auth-token", res.token)
+            window.location.reload(true);
+        }
     }
 
     return (
