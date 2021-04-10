@@ -15,7 +15,7 @@ When youre actually programming inside of the client folder what I like to do is
 inside of the directory and opening up two terminals and split them. The terminal on the left is responsible for doing package installations
 and the terminal on the right will keep the react server running (yarn start)
 
-### Back End (Server)
+### Back End (API Server)
 
 ```bash
 1. cd .\server
