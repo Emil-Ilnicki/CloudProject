@@ -22,3 +22,19 @@ and the terminal on the right will keep the react server running (yarn start)
 2. yarn install (If you dont have yarn run npm install --global yarn)
 3. nodemon
 ```
+
+### Back End (DB Helper Server)
+
+```bash
+1. cd .\server
+2. yarn install (If you dont have yarn run npm install --global yarn)
+3. nodemon
+```
+
+### Back End (Auth Server)
+
+```bash
+1. cd .\server
+2. yarn install (If you dont have yarn run npm install --global yarn)
+3. nodemon
+```
